@@ -1,0 +1,59 @@
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# IDE-specific files
+.idea/
+*.iml
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.metadata/
+
+# Build directories
+/bin/
+/out/
+build/
+target/
+
+# Maven and Gradle files
+.mvn/
+.gradle/
+/build/
+!gradle-wrapper.jar
+
+# JAR/WAR files
+*.jar
+*.war
+*.ear
+
+# Generated files
+*.class
+*.dll
+*.exe
+*.pdb
+
+# Node-related (if using frontend)
+node_modules/
+
+# Mac system files
+.DS_Store
+
+# Java dependency caches
+/.m2/
+/.gradle/
+/build/
+
+# Coverage & test reports
+/test-results/
+/coverage/
