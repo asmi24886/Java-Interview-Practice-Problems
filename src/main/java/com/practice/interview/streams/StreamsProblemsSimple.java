@@ -1,8 +1,10 @@
+package com.practice.interview.streams;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class StreamsProblem {
+public class StreamsProblemsSimple {
 
     /*  EXTRAS:-
 
