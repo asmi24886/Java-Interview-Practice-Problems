@@ -19,7 +19,7 @@ public final class ImmutableEmployee {
     public String getS() { return s; }
     public Map<Integer, String> getM() { return cloneMap(m); }
 
-    public static <K, V> Map<K, V> cloneMap(Map<K, V> map) {
+    private static <K, V> Map<K, V> cloneMap(Map<K, V> map) {
         return Collections.unmodifiableMap(
                 map.entrySet().stream().collect(
                         Collectors.toMap(Map.Entry<K, V>::getKey, Map.Entry<K, V>::getValue)
