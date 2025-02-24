@@ -1,6 +1,7 @@
 package com.practice.interview.streams;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -92,6 +93,23 @@ public class CollectorProblems {
         List<Boxed> result6 = Stream.of(1, 2, 3, 4, 5).map(Boxed::new).collect(Collectors.toList());
         Collections.sort(result6, Comparator.comparing(bx -> bx.value, Comparator.reverseOrder()));
         System.out.println(result4);
+    }
+
+    public static void collector_character_stream() {
+        String input = "aabbcccddeeeffff";
+        Map<Character, Long> map = input.chars().mapToObj(i -> (char) i).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        Map<Character, Long> filteredMap = map.entrySet().stream().filter(e -> e.getValue() % 2 == 0).collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
+        System.out.println(filteredMap);
+    }
+
+    public static void collector_character_stream_then_counting() {
+        String input = "aabbcccddeeeffff";
+        Map<Character, Long> filteredMap = input.chars().mapToObj(i -> (char) i).collect(
+                        Collectors.collectingAndThen(
+                                Collectors.groupingBy(Function.identity(), Collectors.counting()),
+                                map -> map.entrySet().stream().filter(e -> e.getValue() % 2 == 0).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
+                        )
+                );
     }
 
     public static void main(String args[]) {
