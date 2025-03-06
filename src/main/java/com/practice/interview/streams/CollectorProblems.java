@@ -76,7 +76,7 @@ public class CollectorProblems {
         System.out.println(result2);
 
         List<Integer> result3 = Stream.of(1, 2, 3, 4, 5).collect(Collectors.toList());
-        result3.sort((i, j) -> j - i); //reverse order
+        result3.sort((i, j) -> j - i); //reverse order //natural sorting on collections
         System.out.println(result3);
 
         //Boxed sort with 3 arguments :)
