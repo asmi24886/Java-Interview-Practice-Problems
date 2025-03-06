@@ -112,6 +112,25 @@ public class CollectorProblems {
                 );
     }
 
+    public static void sort_object_by_string_property() {
+        List<Boxed3> result = Stream.of(new Boxed3("John"), new Boxed3("mana"), new Boxed3("kana"))
+                .sorted(Comparator.comparing(b -> b.value)).toList();
+
+        result.forEach(System.out::println);
+    }
+
+    public static void sort_and_concat_arrays() {
+        int [] arr1 = {5,67, 1, 9, 20};
+        int [] arr2 = {54, 8, 91, 3};
+
+        int [] result = Stream.concat(
+                Arrays.stream(arr1).boxed(),
+                Arrays.stream(arr2).boxed()
+        ).sorted().mapToInt(Integer::intValue).toArray();
+
+        System.out.println(result);
+    }
+
     public static void main(String args[]) {
         collector_sorting();
     }
@@ -134,4 +153,9 @@ class Boxed2 implements Comparable<Boxed2> {
     public int compareTo(Boxed2 o) {
         return this.value - o.value;
     }
+}
+
+class Boxed3 {
+    String value;
+    public Boxed3(String v) {value = v;};
 }
