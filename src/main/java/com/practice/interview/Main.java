@@ -7,7 +7,6 @@ import java.util.stream.IntStream;
 public class Main {
 
     /*
-
             Things to look into:
             1. Integer to int
             2. int to Integer
@@ -50,6 +49,14 @@ public class Main {
         /********************************************************/
 
         new String(charArr).chars().mapToObj(i -> (char) i).forEach(System.out::println);
+
+        /*********************************************************/
+
+        int value = 5;
+        int doubleValue = (int) Math.ceil((double)5/2);
+        int intValue = 5/2;
+
+        System.out.println(intValue + " ---- " + doubleValue);
     }
 
 

@@ -131,6 +131,18 @@ public class CollectorProblems {
         System.out.println(result);
     }
 
+    public void partitioning_characters() {
+        String str = "Hello World";
+
+        List<Character> charList = List.of('a', 'e', 'i', 'o', 'u');
+
+        Map<Boolean, Long> result = str.chars()
+                .mapToObj(it -> (char) it).filter(it -> !Character.isWhitespace(it))
+                .collect(Collectors.partitioningBy(charList::contains, Collectors.counting()));
+
+        System.out.println(result);
+    }
+
     public static void main(String args[]) {
         collector_sorting();
     }
