@@ -53,8 +53,8 @@ public class Main {
         /*********************************************************/
 
         int value = 5;
-        int doubleValue = (int) Math.ceil((double)5/2);
-        int intValue = 5/2;
+        int doubleValue = (int) Math.ceil((double)value/2);
+        int intValue = value/2;
 
         System.out.println(intValue + " ---- " + doubleValue);
     }

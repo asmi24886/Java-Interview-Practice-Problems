@@ -14,7 +14,7 @@ public class CollectorProblems {
 
         //Method 1 - Collectors work on objects and boxed types only
         IntStream intStream = s.chars();
-        Map<Boolean, List<Integer>> result1 = intStream.boxed().collect(Collectors.partitioningBy(it -> Character.isDigit(it)));
+        Map<Boolean, List<Integer>> result1 = intStream.boxed().collect(Collectors.partitioningBy(Character::isDigit));
 
         //Method 2
         Stream<Character> characterStream = s.chars().mapToObj(it -> (char) it); //Important because it deals with primitive type. mapToObject automatically boxes the char stream to Stream<Character>
