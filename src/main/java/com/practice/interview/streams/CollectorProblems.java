@@ -40,6 +40,7 @@ public class CollectorProblems {
     public static void collector_problem3() {
 
         System.out.println(Stream.of(1,2,3,4,5).collect(Collectors.groupingBy(i -> i % 2)));
+        //Grouping and Mapping
         System.out.println(Stream.of(1,2,3,4,5).collect( Collectors.groupingBy( integer -> integer % 2, Collectors.mapping( i-> i*10, Collectors.toList() ) ) ));
         LinkedHashMap<Integer, Double> result = Stream.of(1, 2, 3, 4, 5).collect(Collectors.groupingBy(integer -> integer % 2, LinkedHashMap::new, Collectors.averagingInt(i -> i)));
         System.out.println(result); //Limitation of type inference

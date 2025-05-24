@@ -1,6 +1,5 @@
 package com.practice.interview.concurrency;
 
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class OddEvenPrinter {
