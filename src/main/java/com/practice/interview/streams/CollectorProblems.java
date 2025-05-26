@@ -113,6 +113,21 @@ public class CollectorProblems {
                 );
     }
 
+    public static void collector_character_stream_flatmap() {
+        String input = "aabbcccddeeeffff";
+        Map<Character, Long> filteredMap = input.chars().mapToObj(i -> (char) i).collect(
+                Collectors.groupingBy(Function.identity(), Collectors.counting())
+        )
+                .entrySet().stream()
+                .flatMap(e -> e.getValue() % 2 == 0 ? Stream.of(e) : Stream.empty())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
+    public static void flatmap_on_lists() {
+        List<List<Integer>> lists = List.of(List.of(1, 2), List.of(3, 4));
+        List<Integer> finalList = lists.stream().flatMap(l -> l.stream().filter(i -> i%2 == 0)).toList();
+    }
+
     public static void sort_object_by_string_property() {
         List<Boxed3> result = Stream.of(new Boxed3("John"), new Boxed3("mana"), new Boxed3("kana"))
                 .sorted(Comparator.comparing(b -> b.value)).toList();
