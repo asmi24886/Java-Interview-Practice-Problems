@@ -96,7 +96,7 @@ public class CollectorProblems {
         System.out.println(result4);
     }
 
-    public static void collector_character_stream() {
+    public static void collector_character_stream_simple() {
         String input = "aabbcccddeeeffff";
         Map<Character, Long> map = input.chars().mapToObj(i -> (char) i).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         Map<Character, Long> filteredMap = map.entrySet().stream().filter(e -> e.getValue() % 2 == 0).collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
@@ -126,6 +126,15 @@ public class CollectorProblems {
     public static void flatmap_on_lists() {
         List<List<Integer>> lists = List.of(List.of(1, 2), List.of(3, 4));
         List<Integer> finalList = lists.stream().flatMap(l -> l.stream().filter(i -> i%2 == 0)).toList();
+    }
+
+    public static void counting_duplicate_characters_except_space() {
+        String str = "Asmit Basu";
+        Map<Character, Long> map = str.chars().mapToObj(i -> (char) i)
+                .map(c -> Character.toLowerCase(c)).filter(Character::isAlphabetic)
+                .collect(Collectors.groupingBy(c -> c, Collectors.counting()))
+                .entrySet().stream().filter(e -> e.getValue() > 1)
+                .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
     }
 
     public static void sort_object_by_string_property() {
