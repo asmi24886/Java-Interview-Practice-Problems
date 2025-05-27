@@ -15,6 +15,10 @@ public class Main {
             5. Character to String
      */
     public static void main(String[] args) {
+       character_class();
+    }
+
+    public void basics() {
         String input = "aabbcdeeeff";
 
         /********************************************************/
@@ -78,6 +82,21 @@ public class Main {
 
         String s = String.valueOf(charBB);
 
+    }
+
+    public static void character_class() {
+        System.out.println((char) 81);
+        System.out.println((char) Character.toLowerCase(81));
+        System.out.println(Character.toString(81));
+        System.out.println(Character.toString((char)81));
+        // isWhitespace
+        // isDigit
+        // isLetterOrDigit
+        // isLetter
+        // isSpaceChar
+        // toUpperCase
+        // isUpperCase
+        // isAlphabetic(codePoint only)
     }
 
 }

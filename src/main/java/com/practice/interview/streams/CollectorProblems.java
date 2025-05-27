@@ -137,6 +137,44 @@ public class CollectorProblems {
                 .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
     }
 
+
+    public void partitioning_characters() {
+        String str = "Hello World";
+
+        List<Character> charList = List.of('a', 'e', 'i', 'o', 'u');
+
+        Map<Boolean, Long> result = str.chars()
+                .mapToObj(it -> (char) it).filter(it -> !Character.isWhitespace(it))
+                .collect(Collectors.partitioningBy(charList::contains, Collectors.counting()));
+
+        System.out.println(result);
+    }
+
+    public void counting_characters_mapping_to_obj() {
+        String str = "Hello World";
+
+        Map<Character, Long> result = str.chars()
+                .mapToObj(it -> (char) it).filter(it -> !Character.isWhitespace(it))
+                .collect(Collectors.groupingBy(c -> c, Collectors.counting()));
+    }
+
+    //Advanced pattern
+    public void counting_characters_without_mapping_to_obj_and_finding_duplicate() {
+        String str = "Hello World";
+
+        Map<Character, Long> freq = str.chars()
+                .filter(c -> !Character.isWhitespace(c))
+                .collect(
+                        HashMap<Integer, Long>::new,                                // supplier
+                        (map, c) -> map.put(c, map.getOrDefault(c, 0L) + 1),  // accumulator
+                        (m1, m2) -> m2.forEach(
+                                (k, v) -> m1.merge(k, v, Long::sum)
+                        )  // combiner
+                )
+                .entrySet().stream().filter(e -> e.getValue() > 2)
+                .collect(Collectors.toMap(e -> (char) e.getKey().intValue(), Map.Entry::getValue));
+    }
+
     public static void sort_object_by_string_property() {
         List<Boxed3> result = Stream.of(new Boxed3("John"), new Boxed3("mana"), new Boxed3("kana"))
                 .sorted(Comparator.comparing(b -> b.value)).toList();
@@ -152,18 +190,6 @@ public class CollectorProblems {
                 Arrays.stream(arr1).boxed(),
                 Arrays.stream(arr2).boxed()
         ).sorted().mapToInt(Integer::intValue).toArray();
-
-        System.out.println(result);
-    }
-
-    public void partitioning_characters() {
-        String str = "Hello World";
-
-        List<Character> charList = List.of('a', 'e', 'i', 'o', 'u');
-
-        Map<Boolean, Long> result = str.chars()
-                .mapToObj(it -> (char) it).filter(it -> !Character.isWhitespace(it))
-                .collect(Collectors.partitioningBy(charList::contains, Collectors.counting()));
 
         System.out.println(result);
     }
