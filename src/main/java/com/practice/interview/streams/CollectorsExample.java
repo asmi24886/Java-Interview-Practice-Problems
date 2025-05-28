@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class CollectorProblems {
+public class CollectorsExample {
 
     //Stream a string of characters, check and partition by digit and letters
     public static void collector_problem1() {
