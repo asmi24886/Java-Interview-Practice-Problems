@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class StreamProblems {
+public class BasicStreamsExample {
 
     /*  EXTRAS:-
 
