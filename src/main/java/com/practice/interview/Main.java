@@ -2,6 +2,7 @@ package com.practice.interview;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Main {
@@ -97,6 +98,9 @@ public class Main {
         // toUpperCase
         // isUpperCase
         // isAlphabetic(codePoint only)
+        String str = "abcdea";
+        str.chars().mapToObj(c -> (char) c).filter(c -> !Character.isWhitespace(c))
+                .collect(Collectors.groupingBy(c -> c, Collectors.counting()));
     }
 
 }
