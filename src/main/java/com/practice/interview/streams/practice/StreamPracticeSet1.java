@@ -1,4 +1,4 @@
-package com.practice.interview.streams.set1;
+package com.practice.interview.streams.practice;
 
 import java.util.*;
 import java.util.function.Function;
