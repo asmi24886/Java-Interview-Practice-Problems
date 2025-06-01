@@ -1,8 +1,11 @@
 package com.practice.interview.streams.practice;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -61,7 +64,72 @@ public class StreamPracticeSet2 {
         ).toList();
         System.out.println(ansList);
     }
+
+    public static void intersection_of_two_lists() {
+        List<Integer> list1 = List.of(1,2,3,4,5);
+        List<Integer> list2 = List.of(6,3,2,10, 11);
+
+        List<Integer> union = list1.stream().filter(list2::contains).toList();
+        System.out.println(union);
+    }
+
+    //Important - iterate streams from seed
+    public static void generate_nth_fibonacci() {
+        int n = 10;
+        List<Integer> list = new ArrayList<>(List.of(0,1));
+        IntStream.range(2,n).forEach(i ->
+                list.add(list.get(i-1) + list.get(i - 2))
+        );
+
+        List<Integer> list2 = Stream.iterate(List.of(0,1), l -> List.of(l.get(1), l.get(0) + l.get(1))
+        ).limit(n).map(l -> l.getFirst()).toList();
+        System.out.println(list2);
+    }
+
+    //Important - Collector.of example (not Collectors utility)
+    public static void join_person_names() {
+        List<String> list = List.of("Aaba_1", "cab_2");
+        String ans = list.stream().collect(
+                Collector.of(
+                        ArrayList<String>::new,
+                        (l, s) -> l.add(s.split("_")[0]),
+                        (l1,l2) -> {
+                            l1.addAll(l2);
+                            return l1;
+                        },
+                        l -> String.join(",", l)
+                )
+        );
+
+        System.out.println(ans);
+    }
+
+    public static void group_string_by_first_character_and_count() {
+        List<String> list = List.of("a1", "b1", "c1", "a2", "b2");
+        Map<Character, Long> ans = list.stream().collect(
+                Collectors.groupingBy(s -> s.charAt(0), Collectors.counting())
+        );
+
+        System.out.println(ans);
+    }
+
+    public static void list_to_map() {
+        List<String> list = List.of("a1", "b2", "c3", "d4", "e5");
+        Map<Character, String> map = list.stream().collect(Collectors.toMap(
+                s -> s.charAt(0),
+                Function.identity()
+        ));
+
+        System.out.println(map);
+    }
+
+    public static void multiply_array_elements() {
+        Integer [] arr = {1,2,3,4,5};
+        int ans = Arrays.stream(arr).reduce( (i, j) -> i*j).get();
+        System.out.println(ans);
+    }
+
     public static void main (String [] args) {
-        find_string_containing_only_digits();
+        multiply_array_elements();
     }
 }
