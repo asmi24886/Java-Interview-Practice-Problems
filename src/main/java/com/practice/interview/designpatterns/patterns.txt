@@ -1,0 +1,33 @@
+Creational:
+------------
+
+Singleton
+Factory
+AbstractFactory
+Builder
+- Prototype
+
+Structural:
+-------------
+Adapter
+Proxy
+Decorator
+
+- Facade
+- Bridge
+- Flyweight
+
+Functional:
+--------------
+Observer
+Strategy
+State
+Command
+Visitor
+Chain of responsibility
+
+- Mediator
+- Iterator
+
+* memnto
+* template
