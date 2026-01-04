@@ -89,7 +89,17 @@ public class StringPracticeSet1 {
 
         System.out.println(map);
     }
+
+    public static void sort_strings_by_length_and_flag() {
+        List<String> list = List.of("apple", "kiwi", "banana", "fig");
+        boolean ASC = false;
+
+        Comparator<String> comp = ASC ? Comparator.comparing(String::length) : Comparator.comparing(String::length, Comparator.reverseOrder());
+        List<String> res = list.stream().sorted(comp).toList();
+        System.out.println(res);
+
+    }
     public static void main(String[] args) {
-        count_vowels_and_consonants();
+        sort_strings_by_length_and_flag();
     }
 }
