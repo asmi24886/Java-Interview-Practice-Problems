@@ -2,6 +2,7 @@ package com.practice.interview.string;
 
 import javax.naming.PartialResultException;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class StringPracticeSet1 {
@@ -66,7 +67,29 @@ public class StringPracticeSet1 {
 
         System.out.println(s.charAt(pq.peek()[0]));
     }
+
+    public static void remove_all_whitespaces() {
+        String s = "    I   am a       good \n" +
+                "  boy";
+
+        // s.replaceAll("\\s", "");
+        String s1 = s.chars().filter(i -> !Character.isWhitespace(i)).mapToObj(i -> (char)i).collect(
+                StringBuilder::new,
+                StringBuilder::append,
+                StringBuilder::append
+        ).toString();
+        System.out.println(s1);
+    }
+
+    public static void count_vowels_and_consonants() {
+        String s = "Java is fun";
+        Set<Character> vowels = Set.of('a','e','i','o','u');
+        Map<Boolean, Long> map = s.chars().filter(Character::isLetter).mapToObj(i -> (char) i) //this needs to be done because primitive collectors dont have advanced methods
+                .collect( Collectors.partitioningBy(vowels::contains, Collectors.counting()) );
+
+        System.out.println(map);
+    }
     public static void main(String[] args) {
-        first_non_repeated_character_2();
+        count_vowels_and_consonants();
     }
 }
