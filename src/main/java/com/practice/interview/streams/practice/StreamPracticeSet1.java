@@ -17,6 +17,9 @@ public class StreamPracticeSet1 {
         int length2 = Arrays.stream(str.split(" ")).sorted().toList().getLast().length(); //toArray can also be done
 
         int length3 = Arrays.stream(str.split(" ")).sorted(Comparator.reverseOrder()).findFirst().get().length();
+
+        String result =  Arrays.stream(str.split(" ")).collect(Collectors.toMap(s -> s, String::length))
+                .entrySet().stream().max(Comparator.comparing(Map.Entry::getValue)).get().getKey();
     }
 
     public static void remove_duplicates() {
@@ -26,6 +29,14 @@ public class StreamPracticeSet1 {
 
         String simpleStr2 = Arrays.stream(str.split("")).distinct().collect(Collectors.joining(""));
         System.out.println(simpleStr);
+
+        str.chars().distinct().mapToObj(i -> String.valueOf((char) i)).collect(Collectors.joining(""));
+
+        str.chars().distinct().mapToObj(i -> (char) i).collect(
+                StringBuilder::new,
+                StringBuilder::append,
+                StringBuilder::append
+                ).toString();
     }
 
     public static void character_appearing_only_single_time() {
@@ -56,6 +67,10 @@ public class StreamPracticeSet1 {
                 .entrySet().stream()
                 .filter(e -> e.getValue() == 1).toList().stream().map(e -> e.getKey().toString()).collect(Collectors.joining(""));
 
+        IntStream.range(0, str.length()).filter (
+                idx -> idx == str.indexOf(str.charAt(idx))
+        ).mapToObj(idx -> String.valueOf(str.charAt(idx))).collect(Collectors.joining(""));
+
         System.out.println(newStr);
     }
 
@@ -73,6 +88,10 @@ public class StreamPracticeSet1 {
         String str = "I am learning stream api in java";
         int length = Arrays.stream(str.split(" ")).map(String::length).sorted(Comparator.reverseOrder()).skip(1).findFirst().get();
         System.out.println(length);
+
+        Arrays.stream(str.split(" ")).collect(Collectors.toMap(s -> s, s -> s.length()))
+                .entrySet().stream().sorted(Comparator.comparing(e -> e.getValue(), Comparator.reverseOrder()))
+                .map(e -> e.getKey()).limit(2).collect(Collectors.toList()).get(1);
     }
 
     public static void occurrence_of_each_word() {
@@ -98,6 +117,10 @@ public class StreamPracticeSet1 {
         ).toList();
 
         System.out.println(ans2);
+
+        Arrays.stream(str.split(" ")).filter(
+                s -> s.toLowerCase().chars().filter(i -> vowelSet.contains((char) i)).count() >= 2
+        ).collect(Collectors.toList());
     }
 
     public static void partition_odd_even_integers() {
