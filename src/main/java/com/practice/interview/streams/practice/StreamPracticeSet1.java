@@ -141,7 +141,7 @@ public class StreamPracticeSet1 {
         System.out.println(sum);
     }
 
-    // very tricky and important
+    // very tricky and important *****
     public static void find_first_non_repeated_char() {
         String str = "Hello world";
 
@@ -204,7 +204,7 @@ public class StreamPracticeSet1 {
           } catch (Exception e) {
               return  null;
           }
-        }).filter(s -> s != null).toList();
+        }).filter(Objects::nonNull).toList();
         System.out.println(list2);
     }
 
@@ -222,6 +222,30 @@ public class StreamPracticeSet1 {
                 Collectors.toList()
         )).values().stream().toList();
 
+        /*
+            Collection<List<String>> ans = list.stream().collect(
+              Collectors.groupingBy(
+                  s -> s.chars().map(Character::toLowerCase).sorted().collect(
+                        StringBuilder::new,
+                        StringBuilder::append,
+                        StringBuilder::append
+                    ).toString()
+                )
+            ).values();
+
+         */
+
+        /*
+            Collection<List<String>> ans = list.stream().collect(
+              Collectors.groupingBy(
+                  s -> {
+                      char [] chars = s.toLowerCase().toCharArray();
+                      Arrays.sort(chars);
+                      return new String(chars);
+                  }
+                )
+            ).values();
+         */
         System.out.println(lists);
     }
 
@@ -263,8 +287,29 @@ public class StreamPracticeSet1 {
     }
 
     public static void multiply_alternate_start_end_element() {
+        /*
+            Alternate elements variation
+            int [] ans = IntStream.range(0, arr.length).map ( idx -> {
+                    if(idx < 2) return arr[idx];
+                    else return arr[idx-2] * arr[idx];
+                }
+            ).toArray();
+         */
         int [] arr = {4, 5, 1, 7, 2, 9};
-        List<Integer> products = IntStream.range(0, arr.length/2).map(i -> arr[i] * arr[arr.length - i -1]).boxed().toList();
+        List<Integer> products = IntStream.range(0, (arr.length+1)/2).map(i -> arr[i] * arr[arr.length - i -1]).boxed().toList();
+
+        /*
+            int [] ans = IntStream.range(0, (arr.length + 1)/2).map ( idx -> {
+                    int startIdx = idx;
+                    int endIdx = arr.length - idx - 1;
+
+                    if(startIdx < endIdx) {
+                        return arr[startIdx]*arr[endIdx];
+                    }
+                    else return arr[startIdx];
+                }
+            ).toArray();
+         */
         System.out.println(products);
     }
 
